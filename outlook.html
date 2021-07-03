@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Outlook</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>MS Outlook</h1>
+                        <p>Elektroniczną pocztę przerobimy,<br>
+                            Outlookowi się przyjrzymy.<br>
+                            Maila wysłać z automatu? <br>
+                            Wstawić zakres do tematu?<br>
+                            Wpisać w treści coś z tabeli?<br>
+                            Da się. Tylko, co, jeżeli<br>
+                            Dodać muszę załączniki,<br>
+                            A na dysku trzymam pliki?<br>
+                            Wysłać wszystko, co w folderze?<br>
+                            Jak zobaczę, to uwierzę.<br>
+                            Dobra, starczy rymowania,<br>
+                            Trzeba prejść do kodowania.<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/referencje_outlook.PNG" alt="Outlook referencje"></div>
+                </div>
+                <br>
+                <div class="grey-field">
+                    <p class="board">Sub sendmEAsAttachement()<br><br>Dim outApp As Outlook.Application<br>Dim nMail As Outlook.MailItem<br><br>Set outApp = Outlook.Application<br>Set nMail = outApp.CreateItem(olMailItem)<br><br><br>   With nMail<br>       <span class="green">'.Sender =</span><br>       .Display<br>       .Body = "Hello Team," &amp; VBA.vbCrLf &amp; VBA.vbCrLf &amp; "jakiś tekst dla ludzików." &amp; VBA.vbCrLf &amp; VBA.vbCrLf &amp; "Thank you." &amp; VBA.vbCrLf &amp; "Kindest regards," &amp; .Body<br>      <span class="green">'''' .SendUsingAccount = FindSNaccount(outApp) '' jeżeli chcę wysłać z innego konta outlook, to użyję tej komendy<br></span>       .Attachments.Add ThisWorkbook.FullName <span class="green">''dodaje ten plik jako załącznik, można użyć dowolną inną ścieżkę do pliku</span><br>       .Subject = "temat"<br>       .Recipients.Add "emil@domena.pl"<br>       .CC = "jezelichękogośwcopy@toużywam.pl"<br>       .Recipients.ResolveAll <span class="green">''rozwiązuje kontakty w książce adresowej</span><br><br>     End With<br>Set outApp = Nothing<br>Set nMail = Nothing<br><br>End Sub<br><br><br>Function FindSNaccount(outApp As Outlook.Application) As Outlook.Account<br>Dim outAcc As Outlook.Account<br>For Each outAcc In outApp.Session.Accounts<br>     If outAcc.DisplayName Like "*excelwpracy*" Then<br>       Set FindSNaccount = outAcc<br>       Exit Function<br>     End If<br>Next<br><br>Set FindSNaccount = outApp.Session.Accounts(1) <span class="green">'''jezeli nic nie znajdzie w kontach, to użyje pierwszego (główne w outlooku)</span><br><br>End Function<br><br><br><span class="green">'pętla, która z danej ścieżki wrzuci wszystkie pliki o rozszerzeniu xlsx do załączników</span><br>     StrFile = Dir(StrPath &amp; "*.xlsx*")<br><br>     Do While StrFile &lt;&gt; "" <span class="green">'widziałem wersję: Do While Len(StrFile) > 0</span><br>       .Attachments.Add StrPath &amp; StrFile<br>       StrFile = Dir<br>     Loop<br></p>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board">Sub sendemail(wbk As String, doo As String, ccc As String, subj As String, htmlbody As String, Optional pastesomething As String)<br><br><span class="green">'opcjonalny pastesomething :) = jeżeli coś ma zostać wklejone do wiadomości, to jest kopiowane przed wywołaniem tej procedury<br>'wbk = ścieżka do załącznika<br>'doo, ccc to odbiorcy<br>'subj - temat, htmlbody to tekst maila</span><br>Dim OutApp As Object<br>Dim OutMail As Object<br><br>   Set OutApp = CreateObject("Outlook.Application")<br><br>   Set OutMail = OutApp.CreateItem(0)<br><br>       On Error Resume Next <span class="green">'można zrobić sprawdzenie czy jest załącznik, np if wbk &lt;&gt;"" then .attachments.add wbk</span><br><br>       With OutMail<br>       .Display<br>       <span class="green">'Stop<br>       '' .SentOnBehalfOfName = "mail"</span><br>         .To = doo<br>         .cc = ccc<br>         .Subject = subj<br>         .body = htmlbody<br>         .attachments.Add wbk<br>If Not pastesomething = "" Then<br>Dim wordDoc As Word.Document<br>Set wordDoc = OutMail.GetInspector.WordEditor<br><br><span class="green">'wklejamy</span><br>wordDoc.Range.PasteAndFormat wdChartPicture<br>End If<br>          .Send<br>     End With<br>     On Error GoTo 0<br><br>     Set OutMail = Nothing<br>     Set OutApp = Nothing<br>End Sub<br></p>
+                </div>
+                <br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <br><br>
+                        <p>
+                            Jeszcze mi się przypomniało,<br>
+                            Jak się maila wysyłało<br>
+                            do osoby, co korzysta,<br>
+                            z makra, nawet jeśli to stażysta.<br>
+                        </p>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="grey-field">
+                    <p class="board">nMail.to = OutApp.session.accounts.Item(1).DisplayName</p>
+                </div>
+
+                <br><br>
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+        <script src="js/script.js"></script>
+
+    </body>
+
+</html>

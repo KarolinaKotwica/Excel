@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Access</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>MS Access</h1>
+                        <p>Rymowanek o Accessie,<br>
+                            Strasznie pisać nie chce się,<br>
+                            Więc króciutko, najważniesze,<br>
+                            Funkcje najatrakcyjniejsze.<br>
+                            Jak zbudować połączenie?<br>
+                            Gwarantuję powodzenie.<br>
+                            Rekord zaktualizować?<br>
+                            Jak recordset precyzować?<br>
+                            jak go potem przefiltrować?<br>
+                            Do Excela go skopiować?<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/referencje_Adodb.PNG" alt="Adodb. referencje"></div>
+                </div>
+                <br>
+                <div class="grey-field">
+                    <p class="board"><span class="green">'budujemy połączenie z bazą</span><br>Public Function GetCon() As ADODB.Connection<br>Dim sCounter As Integer<br><br>On Error Resume Next<br>GetConnMainLinked.Close<br>On Error GoTo 0<br>Set GetConnMainLinked = Nothing<br><br>sPath = ścieżka z "\" na końcu<br>SFname = "nazwa bazy z rozszerzeniem"<br>Set GetConnMainLinked = New ADODB.Connection<br>   With GetConnMainLinked<br><br>     Provider = "Microsoft.ACE.OLEDB.12.0"<br>     .ConnectionString = "Data Source=" &amp; sPath &amp; sFName &amp; ";Persist Security Info=False"<br>     .CursorLocation = adUseClient<br><br><br>     On Error Resume Next<br>     Do<br>       err.Clear<br>       .Open<br>       sCounter = sCounter + 1<br>     Loop Until sCounter = 100 Or err.Number = 0<br><br>     If err.Number = 0 Then Exit Function<br>     On Error GoTo 0<br>   End With<br><br>MsgBox "Błąd przy otwieraniu bazy ;/", vbExclamation + vbOKOnly<br><br><br>End Function<br><br><br>Private Function ZnajdźWBazie()<br><br>Dim myConn As ADODB.Connection<br>Dim myRs As ADODB.Recordset<br>Dim queryConn As ADODB.Connection<br>Dim reqCounter As Integer<br><br><br>Set myConn = GetCon <span class="green">'opisana wyżej</span><br><br><br>Set myRs = New ADODB.Recordset<br><br>   With myRs<br>     .ActiveConnection = myConn<br>     .source = "SELECT * FROM Tabela WHERE KolumnaA='a';"<br>     .CursorType = adOpenStatic<br>     .LockType = adLockReadOnly <span class="green">'locktype, są</span><br>     .Open<br>   End With<br><br><img src="img/locktype.png" alt="referencje access"><br><br>If myRs.RecordCount &lt;&gt; 1 Then<br>   MsgBox "coś poszło nie tak", vbExclamation + vbOKOnly<br>   myRs.Close<br>   Set myRs = Nothing<br>   myConn.Close<br>   Set myConn = Nothing<br>   Exit Function<br><br>End If<br><br>   Do Until myRs.EOF Or ofsset = 10000<br>     sheets(1).Range("A2").Offset(ofsset, 0).Value = myRs.Fields(1).Value<br>     sheets(1).Range("B2").Offset(ofsset, 0).Value = myRs.Fields(3).Value<br>     sheets(1).Range("C2").Offset(ofsset, 0).Value = myRs.Fields(5).Value<br>     myRs.MoveNext<br>     ofsset = ofsset + 1<br>   Loop<br><br>   <span class="green">' albo sheets(1).range("a2").copyfromrecordset myRs</span><br><br>   myRs.Close<br>     Set myRs = Nothing<br>     myConn.Close<br>     Set myConn = Nothing<br><br>End Function<br><br><span class="green">'najprostsza wersja recordset update, chyba</span><br>Sub UpdateRS()<br><br>Dim sqlStatement As String<br><br>Dim myConn As ADODB.Connection<br>Dim myRs As ADODB.Recordset<br><br><br>     Set myConn = GetConn<br><br><br>     <span class="green">'string to get record from DB</span><br>     sqlStatement = "SELECT * FROM [nazwaTabeli] " &amp; _<br>     "jakaśkolumna=" &amp; 1000 &amp; ";" <span class="green">' tysiąc jest bez ', bo jest liczbą, tylko  stringi zamykamy w ''</span><br><br>     Set myRs = New ADODB.Recordset<br>     myRs.Open sqlStatement, myConn, adOpenKeyset, adLockOptimistic<br><br>     If myRs.RecordCount = 1 Then<br><br><br>       myRs.Update "nazwa pola", wartość <span class="green">'powiedzmy, że activeworksheet.cells(1,1).value</span><br>       myRs.Close<br>       Else<br>       msgbox "więcej niż jeden rekord", vbCritical + vbOKOnly<br>     End if<br><br><br>   Set myRs = Nothing<br><br><br>myConn.Close<br>Set myConn = Nothing<br><br><br>End Sub<br></p>
+                </div>
+                <br><br>
+
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+ 
+        <script src="js/script.js"></script>
+
+
+    </body>
+
+</html>

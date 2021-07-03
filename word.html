@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Word</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>Word</h1>
+                        <p>Z wordem dużo pracowałem,<br>
+                            Bardzo przy nim się wkurzałem,<br>
+                            Jednak dużo nauczyłem,<br>
+                            Jakoś złość przezwyciężyłem.<br>
+                            Dodawałem w nim kontrolki,<br>
+                            Co robiły część demolki.<br>
+                            Wiersze nowe dostawiały,<br>
+                            Niepotrzebne usuwały,<br>
+                            Pewne sekcje powielały,<br>
+                            Formularze wyświetlały.<br>
+                            Dużo jest w nim możliwości,<br>
+                            Doprowadza też do złości.<br>
+                            Nie czas jednak bym marudził,<br>
+                            Tylko żebym się wytrudził,<br>
+                            Swoją wiedzą tu podzielił,<br>
+                            Dobrej rady bym udzielił.<br>
+                            Narzekanie czas zakończyć,<br>
+                            Lepiej makra w Wordzie włączyć.<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/referencje_word.PNG" alt="Word referencje"></div>
+                </div>
+                <br>
+                <div class="grey-field">
+                    <p class="board"><span class="green">'przy okazji pętla, przy użyciu VBA.Dir, która pod daną ścieżką (strP) wyszuka pliki o rozszerzeniu .doc?, czyli docm, docx, doc …</span><br>  strF = Dir(strP &amp; "\*.doc?") <span class="green">'Change as required</span><br><br>    While (strF &lt;&gt; "")<br><br>         Debug.Print strP &amp; "\" &amp; strF <span class="green">‘’’ctrl+g uruchamia immediate window, tam się drukują wyniki</span><br>         If IsWorkBookOpen(strP &amp; "\" &amp; strF) = True Then <span class="green">'opisana wyżej przy okazji excela (polecam zajrzeć)</span><br>         E = E &amp; ", " &amp; strF <span class="green">'zbiera otwarte pliki (w użyciu), można potem taką wiedzę wykorzystać, np wyświetlając potem w msgbox E</span><br>         Else<br>         Set myDocument = appWord.Documents.Open(strP &amp; "\" &amp; strF)<br>         Call costamRob(myDocument) <span class="green">' gdzieś tam można wstawić myDocument.SaveAs, np. .SaveAs2 FileName, 17   (PDF), który zapisze nam nowe okno pliku z nową nazwą pod wskazaną ścieżką</span><br>         myDocument.Close False<br>         End If<br>         strF = Dir<br>    Wend<br></p>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board"><span class="green">'procedura, która w dokumencie Word odświeży wszystkie łącza (linki)</span><br>Sub UpdateLinks(doc As Word.Document)<br>doc.Fields.Update<br>doc.Save<br>End Sub<br></p>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board"><span class="green">'znajduje wiersz w tabeli, który zawiera dany string<br>'For Each tbl In ThisDocument.Tables, funkcja jest wywoływana w pętli po tabelach<br>'związane jest to z większym projektem… długa historia</span><br>For Each tbl In ThisDocument.Tables<br>   For Each tblRow In tbl.Rows<br><br>       Set lastrow = findlastrow(tbl, CStr(startEnd(1)))<br>        If Not lastrow is nothing Then<br>        wstawprzycisk tblRow, "minus", CStr("Tag do przycisku"), CStr("wu wysyałem string, dzięki któremu ustalałem wielkość obrazka) <span class="green">'minus to kod do wybrania później ścieżki do obrazka</span><br><br>         else goto nextrow<br><br>        End If<br>     Next i<br>nextrow:<br>  Next tblRow<br>Next tbl<br><br>Function findlastrow(tbl As Table, lastrow As String) As Row<br>Dim tblRow As Row<br><br>     For Each tblRow In tbl.Rows<br>     Debug.Print tblRow.Cells(1).Range.Text<br>       If Left(tblRow.Cells(1).Range.Text, Len(lastrow)) = lastrow Then<br>        Set findlastrow = tblRow<br>         Exit Function<br>       End If<br>      Next<br>      Set findlastrow = Nothing <span class="green">'jezeli nie znalazł stringa, to nie przypisuję obiektu do wyniku funkcji</span><br>End Function<br><br><span class="green">'wstawiam przycisk w dane miejsce, przypisujac mu tag, nadajac wielkosc oraz<br>'zmieniajac obrazek. Stale okreslaja sciezki do obrazkow</span><br>Function wstawprzycisk(tblRow As Row, jaki As String, taGG As String, fullTable As String)<br>   Dim objcc As contentcontrol<br>   Dim obrazek As String<br>   tblRow.Select<br>     If tblRow.Cells.Count = 1 Then tblRow.Range.Cells(1).Split , 2 <span class="green">''dzeli wiersz na 2 kolumny</span><br><br>   Set objcc = tblRow.Cells(2).Range.ContentControls.Add(wdContentControlPicture)<br>     If jaki = "minus" Then obrazek = obrazekMinus Else obrazek = obrazekPlus <span class="green">''mam constanty, wyglądające tak:<br>      'Const obrazekMinus = "C:\Users\Mariusz\Pictures\Saved Pictures\pobrane.png"<br>      'Const obrazekPlus = "C:\Users\Mariusz\Pictures\Saved Pictures\4Tb4GG7Ec.jpeg"</span><br>         zmienobrazek objcc, obrazek, fullTable<br>      objcc.tag = taGG<br><br>      zmienobrazek objcc, obrazek, fullTable<br>      objcc.tag = taGG<br>      tblRow.Cells(komorka).Range.Font.Hidden = True<br>End Function<br><br>Sub zmienobrazek(objcc As contentcontrol, obrazek As String, fullTable As String)<br>Dim pPicFileName As String<br>Dim size As Long<br><br>If UCase(Right(fullTable, 1)) = "F" Then size = 15 Else size = 10<br>If objcc.Type = wdContentControlPicture Then<br>If objcc.Range.InlineShapes.Count > 0 Then objcc.Range.InlineShapes(1).Delete<br><br> ThisDocument.InlineShapes.AddPicture FileName:=obrazek, _<br>         linktofile:=True, Range:=objcc.Range<br><br>       objcc.Range.InlineShapes(1).ScaleHeight = size<br>         objcc.Range.InlineShapes(1).ScaleWidth = size<br><br>End If<br>End Sub<br></p>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board"><span class="green">'podmieniamy działanie przycisku ctrl+z, można odpalić taką procedurkę przy otwarciu :&rang;</span><br><br>Sub keybindin()<br>FindKey(BuildKeyCode(wdKeyControl, wdKeyZ)).Rebind wdKeyCategoryMacro, "msgboxNoWay"<br>ThisDocument.ActiveWindow.View.ShowAll = True<br><span class="green">'ThisDocument.ActiveWindow.View.ShowHiddenText = True</span><br><br>End Sub<br><br>Sub msgboxNoWay()<br>MsgBox "Nie można cofnąć zmian"<br>End Sub<br></p>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board"><span class="green">'dwie przykładowe procedurki na ContentControl’ach<br>'pierwsza dodaje itemy do listy rozwijanej</span><br>Sub fillwithData(values() As String, objcc As contentcontrol)<br>Dim i As Long<br>     For i = LBound(values) To UBound(values)<br>        objcc.DropdownListEntries.Add values(i)<br>     Next<br>End Sub<br><span class="green">'a druga wyszukuje w danej controlce pewien tekst, jeżeli go odnajdzie zaznacza I wychodzi z pętli (dropdownList)</span><br>Sub chooseFromDropdown(objcc As contentcontrol, val As String)<br>Dim i As Long<br>  For i = 1 To objcc.DropdownListEntries.Count<br>        If StrComp(UCase(objcc.DropdownListEntries(i).Text)<br>UCase(val)) = 0 Then <span class="green">'strcomp()= 0 to dopasowanie 100%</span><br>          objcc.DropdownListEntries(i).Select<br>          Exit For<br>        End If<br><br>     Next<br>End Sub<br></p>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board"><span class="green">'’prosta funkcja, która wynajdzie tabelę, bazując na tekstach zawartych w kolumnie 1 i 1 wierszu</span><br>Function findTable(tekst As String) As Long<br>   For tbl = 1 To ThisDocument.Tables.Count<br>     Debug.Print ThisDocument.Tables(tbl).Cell(1, 1).Range.Text<br>    If Left(ThisDocument.Tables(tbl).Cell(1, 1).Range.Text, Len(tekst)) = tekst Then<br><br>    findTable = tbl<br>    Exit For<br>    End If<br>    Next<br><br>End Function<br></p>
+                </div>
+                <br><br>
+
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Było rutyn do odciny,<br>
+                            Nie dam wszystkich, bez przyczyny.<br>
+                            Wyślij do mnie zapytanie,<br>
+                            Ja odpowiem potem na nie.<br>
+                        </p>
+                    </div>
+                </div>
+
+                <br><br>
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+        <script src="js/script.js"></script>
+
+
+    </body>
+
+</html>

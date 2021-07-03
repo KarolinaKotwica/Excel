@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Scripting.Dictionary</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>Scripting.Dictionary</h1>
+                        <p>Słownik, słownik, lubię go,<br> Dane zbiera, że hoho.<br> Zbiera klucze i wartości,<br> Czasem trzeba wytrwołości.<br> Jednak gdy się go wyuczy,<br> Raczej nigdy nie dokuczy.<br> Vba.Collection jest podobne,<br> Obie, w sumie, są nadobne.
+                        </p>
+                    </div>
+                </div>
+                
+                <br>
+                <div class="grey-field">
+                    <p class="board">Function zbierajdane() As scripting.dictionary<br><br>Application.ScreenUpdating = False<br>Dim d As New Scripting.Dictionary<br>Dim vArray As Variant<br>For Each c In Sheets("sheet35").Range("inandout").Columns(5).Cells<br> If d.Exists(c.Value) Then<br> Set d(c.Value) = d(c.Value) + 1 <span class="green">'jeżeli już istnieje taki klucz w słowniku, to dodaję +1, w ten sposób wiem ile jest takich samych kluczy w danym zakresie</span><br> Else: d.Add c.Value, "1"<br> End If<br>Next<br>zbierajdane = d<br><br>End Function<br><br><br>Sub słowniczek<br>Dim d As scripting.dictionary<br><br>Set d = zbierajdane<br><br>If Not d Is Nothing Then<br>For i = 0 To d.Count - 1<br>debug.print d.Items(i), d.keys(i)<br>Next i<br><br>End If<br><br>End Sub<br><br><span class="green">'słownikczek do tej subrytyny zbudowany był tak,<br>'że pętla przez pewien zakres zbierała informacje ile razy dana osoba pojawia się jako<br>'odpowiedzialna za daną rzecz(ile razy nazwisko pojawiało się w kolumnie, tyle razy coś się działo)</span><br><br>Sub pętlaPrzezKlucze(d As Scripting.Dictionary)<br><br>Dim k As Long<br>Dim os As Variant<br><br>k = d.Count - 1 <span class="green">'tyle jest unikatowych kluczy (właściwie kazdy klucz musi być inikatowy, więc tyle jest kluczy ogółem, bo 0 to pierwszy klucz :))</span><br><br>os = d.Keys()(k) <span class="green">' w moim przypadku kluczami były nazwiska, dlatego zmienna "OS"</span><br>'q = d.Item(k)<br>Do<br> If d.Items()(k) = 0 Then<br> d.Remove d.Keys(k)<br> k = k - 1<br> os = d.Keys(k)<br> End If<br> <span class="green">'tu coś się działo, a potem ilość spraw dla danej osoby była redukowana o 1, poniższym kodem</span><br> Set d.Item(d.Keys(k)) = d.Item(d.Keys(k)) - 1<br>Loop Until k = 0 <span class="green">'zapętlamy dopóki nie pozbędziemy się wszystkich osób i ich spraw</span><br><br><span class="blue">End Sub</span><br></p>
+                </div>
+                <br><br>
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+  
+        <script src="js/script.js"></script>
+
+
+    </body>
+
+</html>

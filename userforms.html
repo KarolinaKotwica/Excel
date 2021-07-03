@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Formularze</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>Formularze</h1>
+                        <p>Jak dodawać formularze?<br>
+                            Tego tutaj nie pokażę.<br>
+                            Coś innego przerobimy,<br>
+                            „Pasek postępu” obczaimy.<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/frm_progressbar.png" alt="Excel progressbar"></div>
+                </div>
+                <br>
+                <div class="grey-field">
+                    <p class="board">Public Sub progresBar(i As Long, status As String)<br><br><span class="green">'i w naszym wypadku to procentowa wartość postępu (100% to zakończony proces)<br>'status to tekst, który pojawi się jako 'tytuł' formularza<br>'dodatkowo formularz posiada dla label o nazwie 'lblMessage wyświetli żądany string<br>'lblProgressbar to niebieski pasek na formularzu (label ze zmienionym kolorem na niebieski)<br>'trick polega na rozszerzaniu niebieskiego paska. 240 u mnie to 100%, bo taką szerokośc ma<br>'szary pasek o nazwie lblProgressBarConteiner ma za zadanie wizualizować postęp,<br>'a taką komendą wywołuje się 'repaint' formularza:<br>'call progresBar(liczba, tekst)</span><br>With F_ProgressBar<br>.Caption = status<br>.lblMessage = VBA.Format(i, "#.00") &amp; "% Completed"<br>.lblProgressBar.Width = 240 / (100 / i)<br>.Repaint<br>End With<br><br>End Sub<br></p>
+                </div>
+                <br><br><br>
+                
+                <div class="topics">
+                <div class="left-text">
+                    <br><br><br><br>
+                    <p>
+                        Warto również mieć sprawdzenie,<br>
+                        Jak przebiega wychodzenie.<br>
+                    </p>
+                </div>
+
+                <div class="right-image"><img src="img/frm_czerwony.PNG" alt="frm czerwony"></div>
+                </div>
+                <br><br>
+                
+                
+                <div class="grey-field">
+                    <p class="board">Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)<br>If CloseMode = 0 Then <span class="green">'ktoś zamknął formularz poprzez wciśnięcie krzyżyka</span><br>Cancel = True <span class="green">'' jeżeli wpiszemy cancel = True, to nie zamknie się formularz :), np można tak zrobić, gdy chcemy, aby był zamykany przycskiem, a nie krzyżykiem</span><br>MsgBox "użyj przycisku ""Cancel"" na formularzu w celu wyjścia"<br>End If<br><br>End Sub<br></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <br><br><br><br><br><br>
+                        <p>
+                            Ciekawostek kilka dam,<br>
+                            By pokazać, mądrze, Wam,<br>
+                            Taby, ListView i labele,<br>
+                            Jeszcze inne, choć niewiele.<br>
+                            Komentarze dodam w kodzie,<br>
+                            Równowaga jest w przyrodzie.
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/customUSerForm.PNG" alt="user form"></div>
+                </div>
+                <div class="center-image">
+                    <div class="right-image"><img src="img/listbox1.PNG" alt="listbox" width="90%;"></div></div>
+                
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board">Private Sub UserForm_Initialize() <span class="green">'' rzeczy, które mają się dziać podczas włączania formularza</span><br>Dim sdsd<br>Dim col As Long<br>Dim ws As Worksheet<br><br>Set ws = ActiveSheet<br>Me.Label41.Caption = "Jakiś tekst"<br><br>Me.ListBox1.RowSource = ws.Name &amp; "!" &amp; "a2:d" &amp; ws.Cells(ws.Rows.Count, "a").End (xlUp).Row <span class="green">''zakres wyświetlanych wierszy w listbox, na obrazku są podkreślone ważne ustawienia, jak liststyle - 1 oznacza dodanie kolumny z checkboxami, multi - możliwość wyboru więcej niż<br>'na obrazku zaznaczone są dodatkowo obiekty 'frame' oraz 'multipage'</span><br>Set ws = Nothing<br><br>End Sub<br><br>Private Sub CommandButton1_Click()<br><br>Dim a As Long<br>For a = 0 To Me.ListBox1.ListCount - 1<br>If Me.ListBox1.Selected(a) = True Then Call jakasprocedura(Me.ListBox1.List(a, 2)) <span class="green">''list(a,2), podobnie jak w arkuszu wskaże nam komórkę w wierszu o indeksie "a", czyli od 0 do oporu, w kolumnie 2, można to podejrzeć w ten sposób:</span><br>debug.Print Me.ListBox1.List(a, 2)<br>Next<br><br>End Sub<br><br>Private Sub CommandButton1_Click()<br><br>If Me.OptionButton1.Value = True Then Call cośtamrób(Me.OptionButton1.Caption) <span class="green">'jeżeli wciśnięty jest pierwszy  przycisk opcji,<br>'to procedura cośtamrób zostanie wywołana z parametrem z jego tytułem<br>'podobnie działa toggleButton, z tą różnicą, że można ich zaznaczyć kilka, podczas gdy 'OptionButton'y zastępują się</span><br><br>End Sub<br></p>
+                </div>
+
+                <br><br>
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+        <script src="js/script.js"></script>
+
+
+    </body>
+
+</html>

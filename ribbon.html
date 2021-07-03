@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Ribbon</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>Wstążka / menu kontekstowe</h1>
+                        <p>Co to menu kontekstowe?<br>
+                            Się zachodzisz pewnie w głowę.<br>
+                            Kliknij sobie prawym myszy,<br>
+                            Można dodać co zażyczy<br>
+                            Sobie Szef lub jego żona.<br>
+                            Niżej sekcja poświęcona<br>
+                            Wstążce, makrom i obrazkom,<br>
+                            I kolorkom, zawijaczkom.<br>
+                            Nie masz XML edytora?<br>
+                            Lub ribbonów kreotara?<br>
+                            Nic nie szkodzi, tu pokażę,<br>
+                            Przy okazji się wykażę,<br>
+                            Jak programistycznie sprawić,<br>
+                            By coś mogło się pojawić -<br>
+                            Nowy guzik na wstążeczce,<br>
+                            Jak cukierek w choineczce.<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/menu%20kontekstowe.png" alt="menu kontekstowe"></div>
+                </div>
+                <br>
+                <div class="grey-field">
+                    <p class="board">Sub RemoveGMIFTSBar()<br>  <span class="green">' ta procedura usuwa, dla pewności, bar ze wstązki, żeby nie pojawiały sie kilkukrotnie<br>' jeżeli nie ma jeszcze tego bara, to nic się nie dzieje</span><br>  On Error Resume Next<br>  Application.CommandBars("name ").Delete<br><br>End Sub<br><br>Sub> CreateBar()<br>  Dim oBar As CommandBar<br>  Dim oControl As CommandBarControl<br><br>Application.ScreenUpdating = False<br><br>  RemoveGMIFTSBar  <span class="green">'tu dla bezpieczeństwa usuwany jest bar, żeby ich nie duplikować<br>  'tworzymy nowy tab, na samym końcu, o nazwie ‘addins’</span><br>  Set oBar = Application.CommandBars.Add(Position:=msoBarTop, Temporary:=True)<br><br>  With oBar<br>  .NameLocal = "name"<br>   .Name = " name "<br>   .Visible = True<br>  End With<br><span class="green">‘’’dodajemy kontrolki</span><br>Set oControl = oBar.Controls.Add(ID:=1, Before:=1)<br>With oControl<br>    .OnAction = "extractExcel" <span class="green">' jakie macro ma zostać wywołana po wciśnięciu</span><br>    .FaceId = 5   <span class="green">'’obrazek</span><br><br>    .Caption = "Guzik"<br>    .Style = msoButtonIconAndCaption<br>    .TooltipText = "tooltip"<br>  End With<br><br><br>End Sub<br></p>
+                </div>
+                <br><br><br>
+
+                <div class="topics">
+                    <div class="left-text">
+                        <br><br><br><br>
+                        <p>
+                            Przy okazji, żeby w menu kontekstowe,<br>
+                            Dać ikonki impastowe,<br>
+                            Można użyć tego kodu,<br>
+                            Bez zachodu nie ma miodu.<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/contextmenu.PNG" alt="menu kontekstowe"></div>
+                </div>
+                <br><br>
+
+
+                <div class="grey-field">
+                    <p class="board">Sub DodajDOmenuKomorki()<br>  Dim ContextMenu As CommandBar<br>  Dim MySubMenu As CommandBarControl<br><br><span class="green">'w tym miesjcu wstawiłbym zabezpieczenie przed duplikowaniem kontrolek, opisane niżej<br>'po wklikaniu się prawym w komórkę pojawi się nowe menu</span><br>  Set ContextMenu = Application.CommandBars("Cell")<br><br><br>  <span class="green">'Dodaję menu kontekstowe z 2 guzikami w liście rozwijanej</span><br>  Set MySubMenu = ContextMenu.Controls.Add(Type:=msoControlPopup, Before:=1)<br><br>With MySubMenu<br>  .Caption = "ListaRozwijana"<br>  .Tag = "Tak,którego będziemy używać np do pozbycia się dodanych przycisków"<br><br>With .Controls.Add(Type:=msoControlButton)<br>   .OnAction = "Makro1"<br>   .FaceId = 612<br>   .Caption = "Makro1"<br>   .TooltipText = "opis makro1"<br>  End With<br>   With .Controls.Add(Type:=msoControlButton)<br>    .OnAction = "Makro2"<br>    .FaceId = 366<br>    .Caption = "Makro2"<br>    .TooltipText = "opis makro2"<br><br>   End With<br><br>  End With<br><br>  ContextMenu.Controls(4).BeginGroup = True<br><br><br>Set MySubMenu = Nothing<br>Set ContextMenu = Nothing<br><br>End Sub<br></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <br><br>
+                        <p>
+                            Jak się pozbyć później tego?<br>
+                            Ja polecam coś takiego:<br>
+                        </p>
+                    </div>
+
+                </div>
+
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board">Sub UsunzMenukontekstowego()<br>  Dim ContextMenu As CommandBar<br>  Dim ctrl As CommandBarControl<br><br>  <span class="green">'menu komórki</span><br>  Set ContextMenu = Application.CommandBars("Cell")<br><br>  <span class="green">'w tym przypadku usuwam kontrolki po tagu: "Tak,którego będziemy używać np do pozbycia się dodanych przycisków"</span><br>  For Each ctrl In ContextMenu.Controls<br>   If ctrl.Tag = "Tak,którego będziemy używać np do pozbycia się dodanych przycisków" Then<br>     ctrl.Delete<br>      End If<br>  Next ctrl<br><br><br>     <span class="green">'czasami na samej górze pojawia się klawisz „Save”, dla pewności usuwam</span><br>  On Error Resume Next<br>  ContextMenu.FindControl(ID:=3).Delete<br>  On Error GoTo 0><br>  Set ContextMenu = <span class="blue">Nothing<br><br>End Sub</span><br></p>
+                </div>
+
+                <br><br>
+                
+                <div class="topics">
+                    <div class="left-text">
+                        <br><br><br><br>
+                        <p>
+                            Ważne jest, by mieć sprawdzenie,<br>
+                            By ominąć gromadzenie,<br>
+                            Się przycisków identycznych,<br>
+                            Komentarzy też, cynicznych,<br>
+                            Przecież brzydko to wygląda<br>
+                            I kolegów śmiech przyciąga :)<br>
+                        </p>
+                    </div>
+
+                    <div class="right-image"><img src="img/Contextmenu2.PNG" alt="menu kontekstowe"></div>
+                </div>
+                <br><br>
+
+                <div class="grey-field">
+                    <p class="board"><span class="green">'dwa sposoby:<br>'1: sprawdzam czy istnieje guzik o takim tagu</span><br>Dim spr As Boolean<br>For Each ctrl In ContextMenu.Controls<br>  If ctrl.Tag = "Tak,którego będziemy używać np do pozbycia się dodanych przycisków" Then<br>   Spr = True<br>  End If<br>Next ctrl<br>If Not spr = True Then<br><span class="green">'procedura dodawania :&#41;</span><br>End If<br><br><span class="green">'2: profilaktycznie w macro do dodania przycisków dodaję procedurkę do usunięcia na samym początku</span><br>Sub DOdajDoMenuKomorki()<br>     Dim ContextMenu As CommandBar<br>     Dim MySubMenu As CommandBarControl<br><br><br>Call UsunzMenukontekstowego<br></p>
+                </div>
+                <br><br>
+                
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+        <script src="js/script.js"></script>
+
+
+    </body>
+
+</html>

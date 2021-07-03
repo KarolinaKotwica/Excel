@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable='no'">
+        <meta name="description" content="Excelwpracy.pl - strona główna, ciekawostki ze świata Excela, pomoc, zlecenia, porady">
+        <meta name="keywords" content="excel, excel praca, excel w pracy, vba, excel vba, excel wykresy, excel funkcje, excel formularze, excel online, microsoft excel, excel kurs, excel samouczek, excel podstawy">
+        <title>VBA Excel</title>
+
+        <link rel="stylesheet" href="less/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+        <link href="fonts/cour.ttf" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<!--[endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!---------------------- NAVIGATION MENU ---------------------------------->
+            <div class="sidebar">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+                <div class="wrapper-nav" id="menu">
+                    <a href="index.html" class="home">Strona główna</a>
+                    <p class="name-nav">EXCEL</p>
+                    <ul class="nav">
+                        <li><a href="wykresy.html">Wykresy</a></li>
+                        <li><a href="funkcje.html">Funkcje</a></li>
+                    </ul>
+
+
+                    <p class="name-nav">VBA</p>
+                    <ul class="nav">
+                        <li><a href="excel.html">Excel</a></li>
+                        <li><a href="userforms.html">Formularze</a></li>
+                        <li><a href="ribbon.html">Ribbon/Context Menu</a></li>
+                        <li><a href="outlook.html">Outlook</a></li>
+                        <li><a href="powerpoint.html">PowerPoint</a></li>
+                        <li><a href="access.html">Access</a></li>
+                        <li><a href="word.html">Word</a></li>
+                        <li><a href="internet_explorer.html">Internet Explorer</a></li>
+                        <li><a href="sap.html">SAP</a></li>
+                        <li><a href="scriptingdictionary.html">Scripting.Dictionary</a></li>
+                    </ul>
+
+                    <!---------------------- Contact ---------------------->
+
+                    <p class="contact">
+                        W razie pytań lub zlecenia pracy, zapraszam do kontaktu:
+                        <span class="email"><a href="mailto:rafal@exelwpracy.pl?Subject=Hello%20again" target="_top">rafal@excelwpracy.pl</a></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--------------------------------- CONTEXT ---------------------------------->
+
+            <div class="main" id="demo">
+
+                <!-----------TEMATY -------------------->
+
+                <div class="topics">
+
+                    <div class="left-text">
+                        <h1>Dane z zamkniętego arkusza recordset adodb</h1>
+                        <p>Jak wyciągnąć dane z pliku?<br>
+                            Metod na to jest bez liku.<br>
+                            Może trochę przesadziłem,<br>
+                            Dwie, co najmniej, naliczyłem.<br>
+                            Można wyjąć bez patrzenia,<br>
+                            Warte jest to obczajenia.<br>
+                            Nie ma po co go otwierać,<br>
+                            Po zamkniętym można szperać.<br>
+                        </p>
+                    </div>
+                    
+                    <div class="right-image"><img src="img/referencje_Adodb.PNG" alt="referencje Adodb"></div>
+                </div>
+                <br>
+                <div class="grey-field">
+                    <p class="board"><span class="green">'przy poocy takiej funkcji można na spokojności wysłać zapytanie SQL do zamkniętego pliku Excel<br>'i uzyskać w odpowiedzi żądane dane<br>'wywałać funkcję można w taki sposób:<br>'Set rst = GetRS(pełnaŚcieżka, stSQl, opcjonalnie nazwa pliku), gdzie definiujemy rst jako ADODB.Recordset (Dim rst As ADODB.Recordset)</span><br><br>Function GetRS(wbkTocopy As String, stsql As String, Optional e As String)<br>As ADODB.Recordset<br><br>Dim rst As ADODB.Recordset<br>Dim stcon As String<br>Set rst = New ADODB.Recordset<br><br>On Error GoTo errPR<br>     stcon = "Provider=Microsoft.ACE.OLEDB.12.0;" &amp; _<br>       "Data Source=" &amp; wbkTocopy &amp; ";" &amp; _<br>       "Extended Properties='Excel 12.0;HDR=YES'"<br><br>      rst.Open stsql, stcon, adOpenStatic<br>      If rst.EOF Or rst.BOF Then Exit Function     <span class="green">' sprawdzam czy są rekordy w recordsecie (czy nie jest pusty)</span><br><br>      rst.MoveLast   <span class="green">''ten krok</span><br>      rst.MoveFirst  <span class="green">''i ten służą do naprawienia błędu recotdset.count -1</span><br>      Set GetRS = rst<br><br><span class="blue">Set</span> rst = <span class="blue">Nothing</span><br>stcon = Empty<br>normalExit:<br>Exit Function<br><br>errPR:<br>MsgBox "something went wrong, probably sheet name in: " &amp; e, vbExclamation<br>End<br>End Function<br></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                <div class="left-text">
+                    <p>
+                        Kod poniżej pokazuje,<br>
+                        Jak nagłówki uzyskuje,<br>
+                        Przy użyciu recordset’a –<br>
+                        Wiedza zaczerpnięta z neta.<br>
+                    </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board"><span class="green">‘dwie pętle, robiące dokładnie to samo</span><br>iFieldCount = rst.Fields.Count<br>For i = 1 To iFieldCount<br>    objSheet.Range("A" &amp; i) = rst.Field(i).Name<br>Next i<br><br><span class="green">‘***********************************</span><br><br><span class="green">‘’Call addHeadrers(ws, rst)</span><br>Sub addHeadrers(ws As Worksheet, rst As ADODb.Recordset)<br> Dim r<br>Dim a As Long<br>a = 1<br><br>     For Each r In rst.Fields<br>         ws.Cells(1, a).Value = r.Name<br>     a = a + 1<br>     Next<br><br>End Sub</p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Ile wierszy w recordset’cie?<br>
+                            Z tej komendy to weźmiecie.<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board">Rst.recordcount  <span class="green">‘’’’jeżeli wychodzi -1, to warto zrobić rst.movelast, rst.move first, pomaga</span></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Mam recordset, co z nim zrobić?<br>
+                            Jak na dane go przerobić?<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board">Sheets(1).cells(1,1).copyfromrecordset rst <span class="green">‘’’’ generalnie wybieramy pierszą komórkę, w którą zostaną wklejone dane</span></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Chyba to ogarnąć zdołam.<br>
+                            Jak tę funkcję sam przywołam?<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board"><span class="green">‘ jako from dajemy nazwę arkusza w danym pliku, w miejscu gwiazdki dajemy nazwy kolumn</span><br>stsql = "SELECT * from [Sheet1$]"<br><br>Set rst = GetRS(fullfilePath, stsql)</p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Jeszcze jedna mała sprawa -<br>
+                            Przez reordset to przeprawa.<br>
+                            Idąc przezeń wiersz, po wierszu<br>
+                            Się poczujesz jak na perszu.<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board">For a = 1 to rst.recordcount<br>    Rst.move a<br><span class="green">‘’’’tu robimy akcję, jakąkolwiek, ja np dodawałem do słowniczka rzeczy do kontroli,<br>‘’ tak, losowałem sobie próbki do sprawdzenia przy pomocy recordset’a<br>‘’ gdy miałem wylosowane a, to sprawdzałem czy znajduje się w słowniczku (scripting dictionary)<br>‘’ if not d.exists , then d.add ….<br>‘’scripting.dictionary będzie w dalszej części<br></span>Rst.MoveFirst <span class="green">‘ wracamy do początku<br></span>Next<br><span class="green">'albo</span><br>rs.MoveFirst <span class="green">'niekoniecznie musi być, ale warto wyrobić sobie taki nawyk :)</span><br>   Do Until rs.EOF = True<br><span class="green">      'akcja np  Debug.Print rs.Fields("nazwa Kolumny")</span><br>      rs.MoveNext <span class="green">'przechodzimy do kolejnego rekordu</span><br>   Loop<br></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Recordsetem po zakresie?<br>
+                            Szybciej dane wyciągnie się :)<br>
+                        </p>
+                    </div>
+                </div>
+                
+                
+                <div class="grey-field">
+                    <p class="board">lastcolumn = Data_sht.Cells(1, Data_sht.Columns.Count).End(xlToLeft).Column <span class="green">‘ ostatnia kolumna w pierwszym wierszu</span>lastrow = Data_sht.Cells(Data_sht.Rows.Count, 13).End(xlUp).Row <span class="green">‘ ostatni wiersz w 13 kolumnie (M)</span></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Jak zapisać Excel jako?<br>
+                            Spróbuj użyć funkcję taką.<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board">Set Destwb = thisworkbook<br>Scieżka = “C:\”<br>Name = “przykładowaNazwaPliku”<br><span class="green">  ‘spradzamy z której wersji excela korzystamy</span><br>  With Destwb<br>      If Val(Application.Version) &lt; 12 Then   <span class="green">‘ 97-2003</span><br>         FileExtStr = ".xls": FileFormatNum = -4143<br>      Else<br><span class="green">         '2007-2016</span><br>           Select Case Sourcewb.FileFormat<br>           Case 51: FileExtStr = ".xlsx": FileFormatNum = 51<br>           Case 52:<br>               If .HasVBProject Then<br>                   FileExtStr = ".xlsm": FileFormatNum = 52<br>               Else<br>                   FileExtStr = ".xlsx": FileFormatNum = 51<br>               End If<br>           Case 56: FileExtStr = ".xls": FileFormatNum = 56<br>           Case Else: FileExtStr = ".xlsb": FileFormatNum = 50<br>           End Select<br>         End If<br>  End With<br><br>Destwb.SaveAs scieżka &lt; name &lt; FileExtStr, FileFormat:=FileFormatNum<br></p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Tylko odczyt? Nie chcę tak,<br>
+                            Czyś otwarty? Daj mi znak.<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board">Function IsWorkBookOpen(FileName As String) As Boolean<br>   Dim ff As Long, ErrNo As Long<br><br>   On Error Resume Next<br>   ff = FreeFile()<br>   Open FileName For Input Lock Read As #ff<br>   Close ff<br>   ErrNo = Err<br>   On Error GoTo 0<br><br>   Select Case ErrNo<br>   Case 0:    IsWorkBookOpen = False <span class="green">'nikt nie używa pliku</span><br>   Case 70:   IsWorkBookOpen = True <span class="green">' plik jest w użyciu</span><br>   Case Else: Error ErrNo<br>   End Select<br>End Function</p>
+                </div>
+                <br><br><br>
+                <div class="topics">
+                    <div class="left-text">
+                        <p>
+                            Kiedyś była taka sprawa<br>
+                            I co miesiąc z nią zabawa.<br>
+                            Skrót miesiąca do komórki,<br>
+                            A za miesiąc znów powtórki ;/<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grey-field">
+                    <p class="board"><span class="green">'przy użyciu tej pętli można w żadane komórki wrzucić skróconą nazwę miesiąca, pisaną wielką literą, z dwukropkiem oraz ją pogrubić i zmienić kolor na niebieski</span><br>For a = 2 To lastrow <span class="green">''lastrow = ostatni wiersz :)</span><br>ws.Cells(a, 3).Value = VBA.Format(VBA.Now, "Mmm") &amp; ":"<br>ws.Cells(a, 3).Characters(1, 1).Caption = VBA.UCase(ws.Cells(a, 3).Characters(1, 1).Caption)<br>If Not c.Characters.Count &lt; 3 Then<br><br>ws.Cells(a, 3).Characters(1, 3).Font.Bold = True<br>ws.Cells(a, 3).Characters(1, 3).Font.Color = RGB(16, 16, 146)<br><br>End If<br>Next</p>
+                </div>
+                <br><br><br>
+                <div class="grey-field">
+                    <p class="board">Sub InsertCheckBoxes()<br><br>Dim Rng As Range<br>Dim WorkRng As Range<br>Dim Ws As Worksheet<br><span class="green">'poniższa procedura wstawia w każdą komórkę tabeli 'tblOferta' 'L.P', checkbox, idealnie dopasowany do rozmiaru komórki, oraz łączy dany checkbox z komórką w w kolumnie "n" w tym samym wierszu (dopóki komórka 4 kolumny w prawo nie będzie pusta)</span><br>Set Ws = ThisWorkbook.Sheets("Oferta")<br>Application.ScreenUpdating = False<br>Application.EnableEvents = False<br><br><br>For Each Rng In Ws.Range("tblOferta[L.P.]").Cells<br>   If Rng.Offset(, 4).Value = "" Then Exit For<br>   With Ws.CheckBoxes.Add(Rng.Left, Rng.Top, Rng.Width, Rng.Height)<br>       .Characters.Text = ""<br>       .Value = xlOff<br>       .LinkedCell = "$N$" &amp; Rng.Row<br>       .Display3DShading = False<br>   End With<br><br>Next<br>Set Ws = Nothing<br>Set Rng = Nothing<br><br>Application.EnableEvents = True<br><br>Application.ScreenUpdating = True<br>End Sub<br></p>
+                </div>
+                <br><br><br>
+                <div class="grey-field">
+                    <p class="board">Private Sub Worksheet_SelectionChange(ByVal Target As Range)<br><span class="green">'pracedurka, która dla komórek w danem zakresie (u mnie tabela "tblOferta") będzie wciskać f2 - innymi słowy single click cell edit (jeżeli arkusz nie jest zabezpieczony Oraz zaznaczona jest jedna komórka)</span><br>On Error GoTo exitssusfd<br>If Target.Cells.Count = 1 Then<br>If Not Intersect(Target, Me.Range("tblOferta")) Is Nothing And Intersect(Target, Me.Range("tblOferta[rabat?]")) Is Nothing And Target.Value &lt;&gt; "" Then<br><br>If Me.ProtectContents = True Then<br>>If> Target.Locked = False Then<br>SendKeys "{F2}"<br>End If<br>Else<br>SendKeys "{F2}"<br>End If<br>End If<br><br>End If<br>exitssusfd:<br>End Sub<br></p>
+                </div>
+                
+                
+                <br><br>
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src=" http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+        <script src="js/script.js"></script>
+
+
+    </body>
+
+</html>
